@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+* {
+    font-family: 'Permanent Marker', cursive;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 250px;
+    height: 250px;
+    transition: .1s transform ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+.img-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.element {
+    margin: 0;
+    margin-top: 15px;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f4c434;
+    display: flex;
+    justify-content: center;
+}
+
+.battle-container {
+    width: 85vw;
+    height: 75vh;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.battle {
+    width: 60vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vs {
+    margin-top: 300px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+h2,
+h3 {
+    font-size: 35px;
+    text-align: center;
+}
+
+#result {
+    margin-top: 75px;
+}
+
+#msg {
+    margin-top: 30px;
+}
+
+.title {
+    font-size: 84px;
+    color: #fff;
+}
+
+select {
+    padding: 4px;
+    font-size: 20px;
+    background-color: transparent;
+    border: 2px solid #000;
+    outline: none;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
