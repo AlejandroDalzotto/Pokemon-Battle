@@ -2,6 +2,24 @@ const result = document.getElementById('result');
 const select_attacker = document.getElementById('select-attacker');
 const select_defender = document.getElementById('select-defender');
 
+const input_attack = document.getElementById('input-attack');
+const input_defense = document.getElementById('input-defense');
+
+let attack = input_attack.value;
+let defense = input_defense.value;
+
+const pokemonType = ['normal', 'fire', 'water', 'electric', 'grass', 'ice', 'fighting', 'poison'];
+
+input_attack.addEventListener('change', () => {
+    attack = input_attack.value;
+    main(attack, defense);
+});
+
+input_defense.addEventListener('change', () => {
+    defense = input_defense.value;
+    main(attack, defense);
+});
+
 let selectedOption_1 = select_attacker.options[select_attacker.selectedIndex].text;
 let selectedOption_2 = select_defender.options[select_defender.selectedIndex].text;
 
@@ -20,7 +38,6 @@ select_defender.addEventListener('change', function () {
  * 'no' = No es muy efectivo: efectividad al 0.5 (50%)
  * 'nulo' Es neutro: efectividad al 1.0 (100%)
  */
-
 const typeChart = {
     'normal': {
         'normal': 'nulo',
@@ -117,6 +134,9 @@ const typeId = {
 
 function battle(attacker, defender, attack, defense) {
 
+    if (!pokemonType.includes(attacker) || !pokemonType.includes(defender))
+        throw new Error('Tipo de pokemon no valido');
+
     let efectividad = 1.0;
     let url_attacker = `https://pokeapi.co/api/v2/pokemon/${typeId[attacker]}`;
     let url_defender = `https://pokeapi.co/api/v2/pokemon/${typeId[defender]}`;
@@ -135,10 +155,6 @@ function battle(attacker, defender, attack, defense) {
         console.log(this.err);
     });
 
-    if (attack < 0 || attack > 100 || defense < 0 || defense > 100) {
-        throw new Error('Valor del ataque o defensa invalidos');
-    }
-
     if (typeChart[attacker][defender] === 'si') {
         efectividad = 2.0;
         document.getElementById('msg').innerHTML = '¡Es súper efectivo!';
@@ -155,8 +171,8 @@ function battle(attacker, defender, attack, defense) {
     result.innerHTML = 'Damage: ' + Math.round(damage);
 }
 
-window.onload = main();
+window.onload = main(attack, defense);
 
-function main() {
-    battle(selectedOption_1, selectedOption_2, 50, 35);
+function main(poke_attack, poke_defense) {
+    battle(selectedOption_1, selectedOption_2, poke_attack, poke_defense);
 }
